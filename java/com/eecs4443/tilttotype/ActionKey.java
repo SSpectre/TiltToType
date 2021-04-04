@@ -1,13 +1,12 @@
 package com.eecs4443.tilttotype;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageButton;
 
 public class ActionKey extends AppCompatImageButton implements Key{
-    private MainActivity activity;
+    private KeyboardActivity activity;
     private Action action;
 
     public ActionKey(Context context) {
@@ -27,7 +26,7 @@ public class ActionKey extends AppCompatImageButton implements Key{
 
     @Override
     public void initialize() {
-        activity = (MainActivity)getContext();
+        activity = (KeyboardActivity)getContext();
         switch (getId())
         {
             case R.id.keyBackspace:

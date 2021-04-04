@@ -1,14 +1,12 @@
 package com.eecs4443.tilttotype;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.appcompat.widget.AppCompatButton;
 
 public class CharacterKey extends AppCompatButton implements Key {
-    private MainActivity activity;
+    private KeyboardActivity activity;
     private CharSequence character;
 
     public CharacterKey(Context context) {
@@ -29,7 +27,7 @@ public class CharacterKey extends AppCompatButton implements Key {
     @Override
     public void initialize()
     {
-        activity = (MainActivity)getContext();
+        activity = (KeyboardActivity)getContext();
         character = getText();
     }
 
