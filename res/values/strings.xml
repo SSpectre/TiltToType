@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TiltToType</string>
+    <string name="typing_hint">Start typing</string>
+</resources>
