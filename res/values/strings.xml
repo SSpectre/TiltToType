@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TiltToType</string>
     <string name="typing_hint">Start typing</string>
+    <string name="setup_title">Setup</string>
+    <string name="ok_button">OK</string>
+    <string name="mode_select">Select Mode:</string>
+    <string name="tilt_mode">Tilt-to-Type</string>
+    <string name="one_handed_mode">One-handed Keyboard</string>
 </resources>

@@ -45,17 +45,21 @@ public class KeyboardActivity extends AppCompatActivity implements SensorEventLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.keyboard_layout);
 
-        tiltMode = false;
+        Bundle b = getIntent().getExtras();
+        tiltMode = b.getBoolean("tiltMode");
 
         typedText = (TextView)findViewById(R.id.typedText);
         table = (TableLayout)findViewById(R.id.keyboardLayout);
 
         if (tiltMode) {
+            typedText.setFocusable(false);
             typedText.setFocusableInTouchMode(false);
             table.setVisibility(View.VISIBLE);
         }
         else {
+            typedText.setFocusable(true);
             typedText.setFocusableInTouchMode(true);
+            typedText.requestFocus();
             table.setVisibility(View.INVISIBLE);
         }
 
@@ -74,10 +78,14 @@ public class KeyboardActivity extends AppCompatActivity implements SensorEventLi
                 } else
                     keyboard[i][j] = tRow.getChildAt(j);
 
-                if (tiltMode)
+                if (tiltMode) {
+                    keyboard[i][j].setFocusable(false);
                     keyboard[i][j].setFocusableInTouchMode(false);
-                else
+                }
+                else {
+                    keyboard[i][j].setFocusable(true);
                     keyboard[i][j].setFocusableInTouchMode(true);
+                }
             }
         }
 
@@ -93,7 +101,7 @@ public class KeyboardActivity extends AppCompatActivity implements SensorEventLi
     //used for setting position of the focus key directly
     private void setFocus(int x, int y)
     {
-        if (x >= 0 && x <= KEYBOARD_ROWS && y >= 0 && y <= KEYBOARD_COLS) {
+        if (tiltMode && x >= 0 && x <= KEYBOARD_ROWS && y >= 0 && y <= KEYBOARD_COLS) {
             keyboard[x][y].requestFocus();
             focusKey = (Key) keyboard[x][y];
             focusX = x;
@@ -104,43 +112,36 @@ public class KeyboardActivity extends AppCompatActivity implements SensorEventLi
     //used for shifting the position of the focus key one at a time
     private void setFocus(boolean vertical, boolean positive)
     {
-        if (vertical)
-        {
-            if (positive)
-            {
-                if (focusX == KEYBOARD_ROWS - 1)
-                    focusX = 0;
-                else
-                    focusX++;
+        if (tiltMode) {
+            if (vertical) {
+                if (positive) {
+                    if (focusX == KEYBOARD_ROWS - 1)
+                        focusX = 0;
+                    else
+                        focusX++;
+                } else {
+                    if (focusX == 0)
+                        focusX = KEYBOARD_ROWS - 1;
+                    else
+                        focusX--;
+                }
+            } else {
+                if (positive) {
+                    if (focusY == KEYBOARD_COLS - 1)
+                        focusY = 0;
+                    else
+                        focusY++;
+                } else {
+                    if (focusY == 0)
+                        focusY = KEYBOARD_COLS - 1;
+                    else
+                        focusY--;
+                }
             }
-            else
-            {
-                if (focusX == 0)
-                    focusX = KEYBOARD_ROWS - 1;
-                else
-                    focusX--;
-            }
-        }
-        else
-        {
-            if (positive)
-            {
-                if (focusY == KEYBOARD_COLS - 1)
-                    focusY = 0;
-                else
-                    focusY++;
-            }
-            else
-            {
-                if (focusY == 0)
-                    focusY = KEYBOARD_COLS - 1;
-                else
-                    focusY--;
-            }
-        }
 
-        keyboard[focusX][focusY].requestFocus();
-        focusKey = (Key) keyboard[focusX][focusY];
+            keyboard[focusX][focusY].requestFocus();
+            focusKey = (Key) keyboard[focusX][focusY];
+        }
     }
 
     @Override
