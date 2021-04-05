@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="character_key">#2D2D2D</color>
+    <color name="action_key">#171717</color>
+    <color name="key_focus">#4197FE</color>
 </resources>

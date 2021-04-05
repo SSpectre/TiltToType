@@ -79,12 +79,12 @@ public class KeyboardActivity extends AppCompatActivity implements SensorEventLi
                     keyboard[i][j] = tRow.getChildAt(j);
 
                 if (tiltMode) {
-                    keyboard[i][j].setFocusable(false);
-                    keyboard[i][j].setFocusableInTouchMode(false);
-                }
-                else {
                     keyboard[i][j].setFocusable(true);
                     keyboard[i][j].setFocusableInTouchMode(true);
+                }
+                else {
+                    keyboard[i][j].setFocusable(false);
+                    keyboard[i][j].setFocusableInTouchMode(false);
                 }
             }
         }
