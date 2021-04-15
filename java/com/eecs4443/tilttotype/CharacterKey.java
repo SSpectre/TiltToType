@@ -34,6 +34,6 @@ public class CharacterKey extends AppCompatButton implements Key {
     @Override
     public void keyAction()
     {
-        activity.sb.append(character);
+        activity.typedBuffer.append(character);
     }
 }

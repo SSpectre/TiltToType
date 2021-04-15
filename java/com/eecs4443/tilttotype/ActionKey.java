@@ -47,8 +47,8 @@ public class ActionKey extends AppCompatImageButton implements Key{
         switch (action)
         {
             case BACKSPACE:
-                if (activity.sb.length() > 0)
-                    activity.sb.deleteCharAt(activity.sb.length() - 1);
+                if (activity.typedBuffer.length() > 0)
+                    activity.typedBuffer.deleteCharAt(activity.typedBuffer.length() - 1);
                 break;
             case ENTER:
                 break;
